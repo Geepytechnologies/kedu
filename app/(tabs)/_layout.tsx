@@ -1,8 +1,11 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Link, Tabs } from "expo-router";
-import { Pressable, useColorScheme } from "react-native";
+import { Pressable, useColorScheme, View, Text } from "react-native";
 
-import Colors from "../../constants/Colors";
+import Colors, { primary } from "../../constants/Colors";
+import { Ionicons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
@@ -11,8 +14,21 @@ function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>["name"];
   color: string;
 }) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
+  return <FontAwesome size={24} style={{ marginBottom: -3 }} {...props} />;
 }
+
+const Linkicon = (props: { color: string }) => {
+  return <Ionicons name="add-circle-outline" size={24} color={props.color} />;
+};
+const Homeicon = (props: { color: string }) => {
+  return <AntDesign name="home" size={24} color={props.color} />;
+};
+const Searchicon = (props: { color: string }) => {
+  return <MaterialIcons name="saved-search" size={24} color={props.color} />;
+};
+const Settingsicon = (props: { color: string }) => {
+  return <Ionicons name="settings-outline" size={24} color={props.color} />;
+};
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -20,14 +36,17 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        tabBarStyle: { backgroundColor: primary },
+        tabBarActiveTintColor: "white",
+        tabBarInactiveTintColor: "#b9b9b9a2",
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
-          title: "Tab One",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: "Home",
+          tabBarIcon: ({ color }) => <Homeicon color={color} />,
+          headerShown: false,
           headerRight: () => (
             <Link href="/modal" asChild>
               <Pressable>
@@ -45,17 +64,39 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="profile"
         options={{
-          title: "Tab Two",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: "Profile",
+          headerShown: false,
+
+          tabBarIcon: ({ color }) => <TabBarIcon name="user-o" color={color} />,
         }}
       />
       <Tabs.Screen
-        name="test"
+        name="add"
         options={{
-          title: "Test Tab",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: "add",
+          headerShown: false,
+
+          tabBarIcon: ({ color }) => <Linkicon color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="search"
+        options={{
+          title: "search",
+          headerShown: false,
+
+          tabBarIcon: ({ color }) => <Searchicon color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: "settings",
+          headerShown: false,
+
+          tabBarIcon: ({ color }) => <Settingsicon color={color} />,
         }}
       />
     </Tabs>

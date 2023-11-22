@@ -3,14 +3,14 @@ import React from "react";
 
 type Props = {};
 
-const test = (props: Props) => {
+const edit = (props: Props) => {
   return (
-    <View>
-      <Text>test</Text>
+    <View style={{ maxHeight: 500, flex: 1, backgroundColor: "red" }}>
+      <Text>edit</Text>
     </View>
   );
 };
 
-export default test;
+export default edit;
 
 const styles = StyleSheet.create({});
