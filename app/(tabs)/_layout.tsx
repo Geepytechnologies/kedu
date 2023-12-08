@@ -1,6 +1,6 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Link, Tabs } from "expo-router";
-import { Pressable, useColorScheme, View, Text } from "react-native";
+import { Pressable, useColorScheme, View, Text, Platform } from "react-native";
 
 import Colors, { primary } from "../../constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
@@ -18,13 +18,13 @@ function TabBarIcon(props: {
 }
 
 const Linkicon = (props: { color: string }) => {
-  return <Ionicons name="add-circle-outline" size={24} color={props.color} />;
+  return <Ionicons name="add-circle-outline" size={27} color={props.color} />;
 };
 const Homeicon = (props: { color: string }) => {
   return <AntDesign name="home" size={24} color={props.color} />;
 };
 const Searchicon = (props: { color: string }) => {
-  return <MaterialIcons name="saved-search" size={24} color={props.color} />;
+  return <MaterialIcons name="saved-search" size={27} color={props.color} />;
 };
 const Settingsicon = (props: { color: string }) => {
   return <Ionicons name="settings-outline" size={24} color={props.color} />;
@@ -36,7 +36,13 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarStyle: { backgroundColor: primary },
+        tabBarStyle: {
+          backgroundColor: primary,
+          height: Platform.OS == "android" ? 70 : 80,
+          borderTopLeftRadius: 17,
+          borderTopRightRadius: 17,
+        },
+        tabBarItemStyle: { paddingVertical: Platform.OS == "android" ? 10 : 0 },
         tabBarActiveTintColor: "white",
         tabBarInactiveTintColor: "#b9b9b9a2",
       }}

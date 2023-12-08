@@ -5,7 +5,7 @@ import {
   ThemeProvider,
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { SplashScreen, Stack } from "expo-router";
+import { SplashScreen, Stack, useSegments } from "expo-router";
 import { useEffect } from "react";
 import { useColorScheme } from "react-native";
 import {
@@ -20,6 +20,10 @@ import {
   WorkSans_400Regular,
 } from "@expo-google-fonts/work-sans";
 import { StatusBar } from "expo-status-bar";
+import { Provider } from "react-redux";
+import store from "../utils/redux/store";
+import { useAuthentication } from "../hooks/useAuthentication";
+import Authcomponent from "../components/auth/Authcomponent";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -70,39 +74,48 @@ function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <StatusBar style={"auto"} />
+    <Provider store={store}>
+      <Authcomponent>
+        <ThemeProvider
+          value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+        >
+          <StatusBar style={"auto"} />
 
-      <Stack>
-        <Stack.Screen name="modal" options={{ presentation: "modal" }} />
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="selectprofile" options={{ headerShown: false }} />
-        <Stack.Screen
-          name="doctor/auth/index"
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="doctor/auth/signup"
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="doctor/auth/login"
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="patient/auth/index"
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="patient/auth/signup"
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="patient/auth/login"
-          options={{ headerShown: false }}
-        />
-      </Stack>
-    </ThemeProvider>
+          <Stack>
+            <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="index" options={{ headerShown: false }} />
+            <Stack.Screen
+              name="selectprofile"
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="doctor/auth/index"
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="doctor/auth/signup"
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="doctor/auth/login"
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="patient/auth/index"
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="patient/auth/signup"
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="patient/auth/login"
+              options={{ headerShown: false }}
+            />
+          </Stack>
+        </ThemeProvider>
+      </Authcomponent>
+    </Provider>
   );
 }

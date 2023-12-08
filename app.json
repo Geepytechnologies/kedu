@@ -5,16 +5,14 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/whiteicon.png",
-    "scheme": "myapp",
+    "scheme": "kedu",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/whitelogo.png",
       "resizeMode": "contain",
       "backgroundColor": "#008080"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
@@ -23,16 +21,15 @@
         "foregroundImage": "./assets/images/whitelogo.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.geepytech.kedu"
+      "package": "com.geepytech.kedu",
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "bundler": "metro",
       "output": "static",
       "favicon": "./assets/images/whitelogo.png"
     },
-    "plugins": [
-      "expo-router"
-    ],
+    "plugins": ["expo-router"],
     "experiments": {
       "typedRoutes": true
     },

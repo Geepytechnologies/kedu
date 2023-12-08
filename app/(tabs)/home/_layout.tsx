@@ -13,6 +13,10 @@ const Layout = () => {
         name="connect/therapistpage"
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        name="connect/therapistpost"
+        options={{ headerShown: false }}
+      />
     </Stack>
   );
 };

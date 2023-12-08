@@ -23,7 +23,7 @@ interface Doctor {
   rating: number;
   reviews: number;
 }
-const doctorsData: Doctor[] = [
+export const doctorsData: Doctor[] = [
   {
     id: "1",
     image: "Image1.jpg",

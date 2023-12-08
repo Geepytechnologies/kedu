@@ -14,9 +14,14 @@ import { Ionicons } from "@expo/vector-icons";
 import { Pressable } from "react-native";
 import Support from "../../assets/images/contact_support.svg";
 import Signout from "../../assets/images/power_settings_new.svg";
-import { router } from "expo-router";
+import { Link, router } from "expo-router";
+import Modal from "react-native-modal";
 
 const settings = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const closeModal = () => {
+    setModalVisible(!modalVisible);
+  };
   const [biometric, setBiometric] = useState(true);
   const [emailnotifications, setEmailnotifications] = useState(false);
   const [pushnotifications, setPushnotifications] = useState(true);
@@ -31,6 +36,75 @@ const settings = () => {
   };
 
   const signout = async () => {};
+  const handleSignout = () => {
+    setModalVisible(true);
+  };
+  const handleSignoutcancel = () => {
+    setModalVisible(false);
+  };
+  const Signoutmodal = () => {
+    return (
+      <Modal
+        style={{ margin: 0, display: "flex", alignItems: "center" }}
+        isVisible={modalVisible}
+        onBackdropPress={closeModal}
+        swipeDirection={["down"]}
+        onSwipeComplete={closeModal}
+        propagateSwipe={true}
+        backdropColor="transparent"
+      >
+        <View
+          style={{
+            backgroundColor: "#43B4B3",
+            minHeight: 250,
+            marginTop: "auto",
+            width: "100%",
+
+            borderTopLeftRadius: 25,
+            borderTopRightRadius: 25,
+          }}
+        >
+          <View
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <View
+              style={{
+                width: 75,
+                height: 5,
+                backgroundColor: "#F0FAFD",
+                marginVertical: 20,
+                borderRadius: 5,
+              }}
+            ></View>
+          </View>
+          <View
+            style={{
+              display: "flex",
+              alignItems: "center",
+              paddingTop: 30,
+              gap: 20,
+              flex: 1,
+            }}
+          >
+            <Pressable onPress={signout}>
+              <Text style={{ fontFamily: "Poppins_500Medium", color: "#fff" }}>
+                Proceed
+              </Text>
+            </Pressable>
+            <Pressable onPress={handleSignoutcancel}>
+              <Text style={{ fontFamily: "Poppins_500Medium", color: "#fff" }}>
+                Cancel
+              </Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+    );
+  };
   return (
     <SafeAreaView
       style={{
@@ -161,13 +235,17 @@ const settings = () => {
               <Support />
               <Text style={styles.profiletext}>Contact support</Text>
             </View>
-            <TouchableOpacity onPress={signout} style={styles.profilesingle}>
+            <TouchableOpacity
+              onPress={handleSignout}
+              style={styles.profilesingle}
+            >
               <Signout />
               <Text style={styles.profiletextred}>Sign out</Text>
             </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
+      <Signoutmodal />
     </SafeAreaView>
   );
 };

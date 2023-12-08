@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "272923351095",
+    "project_id": "kedu-407411",
+    "storage_bucket": "kedu-407411.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:272923351095:android:ac834a92bfc8c125ef07b2",
+        "android_client_info": {
+          "package_name": "com.geepytech.kedu"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAE4EuwKfsEcV7CRZUZRwz3WjdSrajF3Ys"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

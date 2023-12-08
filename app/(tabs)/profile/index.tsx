@@ -7,6 +7,8 @@ import {
   View,
   Image,
   FlatList,
+  Platform,
+  StatusBar,
 } from "react-native";
 import React from "react";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
@@ -137,7 +139,13 @@ const index = (props: Props) => {
             My Connections
           </Link>
           <Text style={styles.option}>Support Groups</Text>
-          <Text style={styles.option}>My Resources</Text>
+          <Link
+            href={"/(tabs)/profile/myresources"}
+            suppressHighlighting
+            style={styles.option}
+          >
+            My Resources
+          </Link>
         </View>
         <Text style={{ marginVertical: 20, fontFamily: "Poppins_400Regular" }}>
           Recent Activities
@@ -176,6 +184,7 @@ export default index;
 const styles = StyleSheet.create({
   container: {
     padding: 20,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 12,
     backgroundColor: "white",
     flex: 1,
   },

@@ -71,7 +71,8 @@ export default function TabOneScreen() {
         <Slider />
         <Notifications />
       </ScrollView>
-      <View
+      <Pressable
+        onPress={() => router.push("/(tabs)/profile/chat")}
         style={{
           backgroundColor: "#51AB9F",
           width: 60,
@@ -86,7 +87,7 @@ export default function TabOneScreen() {
         }}
       >
         <MaterialIcons name="message" size={24} color="white" />
-      </View>
+      </Pressable>
     </View>
   );
 }

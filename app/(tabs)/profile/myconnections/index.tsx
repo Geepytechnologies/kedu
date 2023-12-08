@@ -7,6 +7,8 @@ import {
   View,
   Image,
   TouchableOpacity,
+  StatusBar,
+  Platform,
 } from "react-native";
 import React, { useState } from "react";
 import { Feather, MaterialIcons } from "@expo/vector-icons";
@@ -177,6 +179,7 @@ export default index;
 const styles = StyleSheet.create({
   container: {
     padding: 20,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 12,
     backgroundColor: "white",
     flex: 1,
   },

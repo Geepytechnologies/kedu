@@ -33,7 +33,7 @@ const index = (props: Props) => {
           <View style={styles.nonactivebar}></View>
           <View style={styles.activebar}></View>
         </View>
-        <Link href={"/selectprofile"}>
+        <Link href={"/(auth)/selectprofile"}>
           <View style={styles.arrow}>
             <Feather name="arrow-right" size={24} color="#333333" />
           </View>
