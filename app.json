@@ -13,6 +13,9 @@
       "backgroundColor": "#008080"
     },
     "assetBundlePatterns": ["**/*"],
+    "notification": {
+      "icon": "./assets/images/blackicon96by96.png"
+    },
     "ios": {
       "supportsTablet": true
     },

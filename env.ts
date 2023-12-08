@@ -1,0 +1,3 @@
+export const SUPABASEURL = "https://dlctdeobsksgyhwzmusc.supabase.co";
+export const SUPABASEANONKEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRsY3RkZW9ic2tzZ3lod3ptdXNjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDE4MDkzMzYsImV4cCI6MjAxNzM4NTMzNn0.j4XJPIUK5eqJXqaMiamJhi2201X4f8BuTwuc0izxb9Q";
