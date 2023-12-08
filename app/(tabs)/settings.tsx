@@ -16,8 +16,17 @@ import Support from "../../assets/images/contact_support.svg";
 import Signout from "../../assets/images/power_settings_new.svg";
 import { Link, router } from "expo-router";
 import Modal from "react-native-modal";
+import { useDispatch, useSelector } from "react-redux";
+import { supabase } from "../../utils/supabase/supabase";
+import { SIGNIN } from "../../utils/redux/slices/userSlice";
+import { AUTHENTICATE } from "../../utils/redux/slices/authSlice";
 
 const settings = () => {
+  const dispatch = useDispatch();
+  const { currentuser } = useSelector((state: any) => state.userSlice);
+  const firstname = currentuser?.user_metadata.firstname;
+  const lastname = currentuser?.user_metadata.lastname;
+
   const [modalVisible, setModalVisible] = useState(false);
   const closeModal = () => {
     setModalVisible(!modalVisible);
@@ -35,7 +44,11 @@ const settings = () => {
     setPushnotifications(!pushnotifications);
   };
 
-  const signout = async () => {};
+  const signout = async () => {
+    const { error } = await supabase.auth.signOut();
+    dispatch(SIGNIN(null));
+    dispatch(AUTHENTICATE(false));
+  };
   const handleSignout = () => {
     setModalVisible(true);
   };
@@ -132,8 +145,10 @@ const settings = () => {
 
           <View style={styles.profile}>
             <View>
-              <Text style={styles.name}>{"Maria Roberts"}</Text>
-              <Text style={styles.email}>{"maria@gmail.com"}</Text>
+              <Text style={styles.name}>
+                {firstname} {lastname}
+              </Text>
+              <Text style={styles.email}>{currentuser?.email}</Text>
             </View>
             <View>
               <View style={styles.imgcon}>

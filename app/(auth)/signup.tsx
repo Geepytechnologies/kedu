@@ -73,99 +73,97 @@ const signup = (props: Props) => {
   };
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Pressable onPress={() => router.back()}>
-            <FontAwesome name="angle-left" size={30} color="white" />
-          </Pressable>
-          <Text style={styles.logintext}>Sign up</Text>
+    <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
+      <View style={styles.header}>
+        <Pressable onPress={() => router.back()}>
+          <FontAwesome name="angle-left" size={30} color="white" />
+        </Pressable>
+        <Text style={styles.logintext}>Sign up</Text>
+      </View>
+      <View style={{ display: "flex", gap: 20, marginTop: 50 }}>
+        <View>
+          <Text style={styles.logintext}>First Name</Text>
+          <TextInput
+            onChangeText={(text) => handleFirstnameChange(text)}
+            placeholder="John Doe"
+            placeholderTextColor={primary2}
+            style={styles.inputbox}
+          />
         </View>
-        <View style={{ display: "flex", gap: 20, marginTop: 50 }}>
-          <View>
-            <Text style={styles.logintext}>First Name</Text>
-            <TextInput
-              onChangeText={(text) => handleFirstnameChange(text)}
-              placeholder="John Doe"
-              placeholderTextColor={primary2}
-              style={styles.inputbox}
-            />
+        <View>
+          <Text style={styles.logintext}>Last Name</Text>
+          <TextInput
+            onChangeText={(text) => handleLastnameChange(text)}
+            placeholder="John Doe"
+            placeholderTextColor={primary2}
+            style={styles.inputbox}
+          />
+        </View>
+        <View>
+          <Text style={styles.logintext}>Email</Text>
+          <TextInput
+            onChangeText={(text) => handleEmailChange(text)}
+            placeholder="Enter your email"
+            keyboardType="default"
+            placeholderTextColor={primary2}
+            style={styles.inputbox}
+          />
+        </View>
+        <View>
+          <Text style={styles.logintext}>Phone</Text>
+          <TextInput
+            onChangeText={(text) => handlePhoneChange(text)}
+            placeholder="070-000-000-000"
+            keyboardType="phone-pad"
+            placeholderTextColor={primary2}
+            style={styles.inputbox}
+          />
+        </View>
+        <View>
+          <Text style={styles.logintext}>Password</Text>
+          <TextInput
+            onChangeText={(text) => handlePasswordChange(text)}
+            placeholder="********"
+            secureTextEntry={true}
+            placeholderTextColor={primary2}
+            style={styles.inputbox}
+          />
+        </View>
+        <Pressable onPress={handleSignUp} style={styles.submitbtn}>
+          {loading ? (
+            <ActivityIndicator size={"large"} color={"white"} />
+          ) : (
+            <Text style={styles.submitbtn}>Submit</Text>
+          )}
+        </Pressable>
+        <View style={{ display: "flex", gap: 10 }}>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 5,
+              alignSelf: "center",
+            }}
+          >
+            <Text style={styles.dont}>Don&apos;t have an account?</Text>
+            <Text style={styles.signup}>
+              <Link href="/(auth)/login">login</Link>
+            </Text>
           </View>
-          <View>
-            <Text style={styles.logintext}>Last Name</Text>
-            <TextInput
-              onChangeText={(text) => handleLastnameChange(text)}
-              placeholder="John Doe"
-              placeholderTextColor={primary2}
-              style={styles.inputbox}
-            />
-          </View>
-          <View>
-            <Text style={styles.logintext}>Email</Text>
-            <TextInput
-              onChangeText={(text) => handleEmailChange(text)}
-              placeholder="Enter your email"
-              keyboardType="default"
-              placeholderTextColor={primary2}
-              style={styles.inputbox}
-            />
-          </View>
-          <View>
-            <Text style={styles.logintext}>Phone</Text>
-            <TextInput
-              onChangeText={(text) => handlePhoneChange(text)}
-              placeholder="070-000-000-000"
-              keyboardType="phone-pad"
-              placeholderTextColor={primary2}
-              style={styles.inputbox}
-            />
-          </View>
-          <View>
-            <Text style={styles.logintext}>Password</Text>
-            <TextInput
-              onChangeText={(text) => handlePasswordChange(text)}
-              placeholder="********"
-              secureTextEntry={true}
-              placeholderTextColor={primary2}
-              style={styles.inputbox}
-            />
-          </View>
-          <Pressable onPress={handleSignUp} style={styles.submitbtn}>
-            {loading ? (
-              <ActivityIndicator size={"large"} color={"white"} />
-            ) : (
-              <Text style={styles.submitbtn}>Submit</Text>
-            )}
-          </Pressable>
-          <View style={{ display: "flex", gap: 10 }}>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                gap: 5,
-                alignSelf: "center",
-              }}
-            >
-              <Text style={styles.dont}>Don&apos;t have an account?</Text>
-              <Text style={styles.signup}>
-                <Link href="/doctor/auth/login">login</Link>
-              </Text>
-            </View>
-            <Text style={styles.continue}>or continue with</Text>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                gap: 20,
-                alignItems: "center",
-                alignSelf: "center",
-              }}
-            >
-              <FontAwesome5 name="facebook" size={24} color="white" />
-              <Ionicons name="md-logo-apple" size={24} color="white" />
-              <Googlelogo width={24} height={24} />
-            </View>
+          <Text style={styles.continue}>or continue with</Text>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              gap: 20,
+              alignItems: "center",
+              alignSelf: "center",
+            }}
+          >
+            <FontAwesome5 name="facebook" size={24} color="white" />
+            <Ionicons name="md-logo-apple" size={24} color="white" />
+            <Googlelogo width={24} height={24} />
           </View>
         </View>
       </View>

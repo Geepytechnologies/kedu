@@ -1,11 +1,11 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { primary, primary2 } from "../../constants/Colors";
+import { primary, primary2 } from "../constants/Colors";
 
-import Topleft from "../../assets/images/wavytopleft.svg";
-import Topright from "../../assets/images/topright.svg";
-import Bottomleft from "../../assets/images/bottomleft.svg";
-import Bottomright from "../../assets/images/bottomright.svg";
+import Topleft from "../assets/images/wavytopleft.svg";
+import Topright from "../assets/images/topright.svg";
+import Bottomleft from "../assets/images/bottomleft.svg";
+import Bottomright from "../assets/images/bottomright.svg";
 import { Link } from "expo-router";
 
 type Props = {};
@@ -35,7 +35,7 @@ const selectprofile = (props: Props) => {
             <Link href="/doctor/auth/accountcreated">
               <View style={styles.imgcon}>
                 <Image
-                  source={require("../../assets/images/femaledoctor.jpg")}
+                  source={require("../assets/images/femaledoctor.jpg")}
                   style={styles.doctorimg}
                 />
                 <Text
@@ -53,7 +53,7 @@ const selectprofile = (props: Props) => {
             <Link href="/patient/auth">
               <View style={styles.imgcon}>
                 <Image
-                  source={require("../../assets/images/patient.jpg")}
+                  source={require("../assets/images/patient.jpg")}
                   style={styles.doctorimg}
                 />
                 <Text

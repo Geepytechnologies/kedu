@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAuthentication } from "../../hooks/useAuthentication";
 import { router, useSegments } from "expo-router";
 
@@ -10,12 +10,14 @@ const Authcomponent = ({ children }: Props) => {
   const { isAuthenticated } = useAuthentication();
   const segments = useSegments();
   const authGroup = segments[0] === "(auth)";
-  if (!isAuthenticated && !authGroup) {
-    router.replace("/(auth)/login");
-  }
-  if (isAuthenticated && authGroup) {
-    router.replace("/");
-  }
+  useEffect(() => {
+    if (!isAuthenticated && !authGroup) {
+      router.replace("/(auth)/login");
+    }
+    if (isAuthenticated && authGroup) {
+      router.replace("/");
+    }
+  }, [isAuthenticated, segments]);
   return <>{children}</>;
 };
 

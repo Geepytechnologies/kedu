@@ -19,17 +19,20 @@ import Slider from "../../../components/Slider";
 import Notifications from "../../../components/Notifications";
 import { MaterialIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
+import { useSelector } from "react-redux";
 
 const screenHeight = Dimensions.get("window").height;
 
 export default function TabOneScreen() {
+  const { currentuser } = useSelector((state: any) => state.userSlice);
+  const username = currentuser?.user_metadata.firstname;
   return (
     <View style={{ flex: 1 }}>
       <ScrollView style={styles.container}>
         <View style={styles.top}>
           <View>
             <View style={styles.welcomecon}>
-              <Text style={styles.welcometext}>Hello Jane</Text>
+              <Text style={styles.welcometext}>Hello {username}</Text>
               <HandEmoji />
             </View>
             <View style={styles.subheadercon}>

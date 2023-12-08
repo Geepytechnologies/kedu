@@ -12,9 +12,6 @@ export const useAuthentication = () => {
   const dispatch = useDispatch();
 
   const { isAuthenticated } = useSelector((state: any) => state.authSlice);
-  console.warn(isAuthenticated);
-
-  console.log({ session: session });
 
   const authenticate = async () => {
     try {
@@ -24,18 +21,18 @@ export const useAuthentication = () => {
         dispatch(AUTHENTICATE(false));
       }
 
-      const { data, error, status } = await supabase
-        .from("profiles")
-        .select("*")
-        .eq("id", session?.user.id)
-        .single();
-      if (data) {
-        dispatch(SIGNIN(data.user));
+      // const { data, error, status } = await supabase
+      //   .from("profiles")
+      //   .select("*")
+      //   .eq("id", session?.user.id)
+      //   .single();
+      if (session && session.user) {
+        dispatch(SIGNIN(session.user));
         dispatch(AUTHENTICATE(true));
       }
-      if (error && status !== 406) {
-        throw error;
-      }
+      // if (error && status !== 406) {
+      //   throw error;
+      // }
     } catch (error) {
       dispatch(SIGNIN(null));
       dispatch(AUTHENTICATE(false));

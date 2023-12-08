@@ -1,15 +1,74 @@
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
-import React from "react";
+import {
+  ActivityIndicator,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
+import React, { useState } from "react";
 import { FontAwesome } from "@expo/vector-icons";
 import { primary, primary2 } from "../../constants/Colors";
 import { Link, router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import Googlelogo from "../../assets/images/googlelogo.svg";
+import { supabase } from "../../utils/supabase/supabase";
+import { useDispatch } from "react-redux";
+import { AUTHENTICATE } from "../../utils/redux/slices/authSlice";
+import { SIGNIN } from "../../utils/redux/slices/userSlice";
+import { usePushNotifications } from "../../hooks/usePushNotifications";
 
 type Props = {};
 
 const login = (props: Props) => {
+  const { sendPushNotification } = usePushNotifications();
+  const [userdetails, setUserdetails] = useState({ email: "", password: "" });
+  const [error, setError] = useState({ status: false, message: "" });
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
+
+  const handleEmailChange = (text: string) => {
+    setError({ status: false, message: "" });
+    setUserdetails({ ...userdetails, email: text });
+  };
+
+  const handlePasswordChange = (text: string) => {
+    setError({ status: false, message: "" });
+
+    setUserdetails({ ...userdetails, password: text });
+  };
+
+  const handleSignIn = async () => {
+    setLoading(true);
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: userdetails.email,
+        password: userdetails.password,
+      });
+      if (data && data.user) {
+        dispatch(AUTHENTICATE(true));
+        dispatch(SIGNIN(data.user));
+        const username = data?.user.user_metadata.firstname;
+        sendPushNotification(`Hello ${username}`, "Welcome back to Kedu", {});
+      }
+    } catch (error) {
+      if (error) {
+        setLoading(false);
+
+        // setError({ status: true, message: error?.response?.data });
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+  const handlePress = async () => {
+    await handleSignIn();
+  };
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -22,6 +81,7 @@ const login = (props: Props) => {
         <View>
           <Text style={styles.logintext}>Email</Text>
           <TextInput
+            onChangeText={(text) => handleEmailChange(text)}
             placeholder="user@gmail.com"
             placeholderTextColor={primary2}
             style={styles.inputbox}
@@ -30,13 +90,20 @@ const login = (props: Props) => {
         <View>
           <Text style={styles.logintext}>Password</Text>
           <TextInput
+            onChangeText={(text) => handlePasswordChange(text)}
             placeholder="********"
             secureTextEntry={true}
             placeholderTextColor={primary2}
             style={styles.inputbox}
           />
         </View>
-        <Text style={styles.submitbtn}>Submit</Text>
+        <Pressable onPress={handlePress} style={styles.submitbtn}>
+          {loading ? (
+            <ActivityIndicator size={"large"} color={"white"} />
+          ) : (
+            <Text style={styles.submitbtn}>Submit</Text>
+          )}
+        </Pressable>
         <View style={{ display: "flex", gap: 10 }}>
           <View
             style={{
@@ -49,7 +116,7 @@ const login = (props: Props) => {
           >
             <Text style={styles.dont}>Don&apos;t have an account?</Text>
             <Text style={styles.signup}>
-              <Link href="/doctor/auth/signup">Sign up</Link>
+              <Link href="/(auth)/signup">Sign up</Link>
             </Text>
           </View>
           <Text style={styles.continue}>or continue with</Text>
