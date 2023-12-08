@@ -74,6 +74,33 @@ const appointments = (props: Props) => {
             markingType={"custom"}
           />
         </View>
+        <View
+          style={[
+            styles.rowview,
+            { justifyContent: "space-between", marginTop: 30 },
+          ]}
+        >
+          <Text
+            style={{
+              fontFamily: "Poppins_500Medium",
+              fontSize: 20,
+              lineHeight: 24,
+            }}
+          >
+            Time
+          </Text>
+          <View style={[styles.rowview, { gap: 10 }]}>
+            <Text style={styles.time}>09:41</Text>
+            <View style={[styles.rowview]}>
+              <Pressable style={styles.activetimecon}>
+                <Text style={[styles.activetime]}>AM</Text>
+              </Pressable>
+              <Pressable>
+                <Text style={[styles.inactivetime]}>PM</Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -94,5 +121,35 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 20,
     marginBottom: 40,
+  },
+  rowview: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  time: {
+    backgroundColor: "#7676801F",
+    paddingVertical: 8,
+    paddingHorizontal: 15,
+    fontFamily: "Poppins_400Regular",
+    fontSize: 18,
+    lineHeight: 28,
+  },
+  activetimecon: {},
+  activetime: {
+    padding: 8,
+    backgroundColor: "#43B4B3",
+    fontFamily: "Poppins_500Medium",
+    fontSize: 15,
+    lineHeight: 28,
+    color: "#fff",
+  },
+  inactivetime: {
+    backgroundColor: "#7676801F",
+    padding: 8,
+    fontFamily: "Poppins_400Regular",
+    fontSize: 15,
+    lineHeight: 28,
+    color: "#000",
   },
 });

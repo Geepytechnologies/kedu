@@ -7,6 +7,7 @@ import {
   Dimensions,
   ScrollView,
   Pressable,
+  Image,
 } from "react-native";
 import { primary2 } from "../../../constants/Colors";
 import HandEmoji from "../../../assets/images/handemoji.svg";
@@ -64,7 +65,10 @@ export default function TabOneScreen() {
                 <Text style={styles.linktext}>Meditation</Text>
               </View>
               <View style={styles.link1}>
-                <Meditation width={60} height={60} />
+                <Image
+                  source={require("../../../assets/images/link.jpg")}
+                  style={{ width: 60, height: 60 }}
+                />
                 <Text style={styles.linktext}>Quick Links</Text>
               </View>
             </View>

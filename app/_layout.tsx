@@ -14,7 +14,11 @@ import {
   Poppins_600SemiBold,
   Poppins_700Bold,
 } from "@expo-google-fonts/poppins";
-import { Roboto_400Regular, Roboto_500Medium } from "@expo-google-fonts/roboto";
+import {
+  Roboto_400Regular,
+  Roboto_500Medium,
+  Roboto_700Bold,
+} from "@expo-google-fonts/roboto";
 import {
   WorkSans_500Medium,
   WorkSans_400Regular,
@@ -49,6 +53,7 @@ export default function RootLayout() {
     Poppins_700Bold,
     Roboto_400Regular,
     Roboto_500Medium,
+    Roboto_700Bold,
     ...FontAwesome.font,
   });
 

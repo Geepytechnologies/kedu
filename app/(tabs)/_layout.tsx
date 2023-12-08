@@ -39,8 +39,8 @@ export default function TabLayout() {
         tabBarStyle: {
           backgroundColor: primary,
           height: Platform.OS == "android" ? 70 : 80,
-          borderTopLeftRadius: 17,
-          borderTopRightRadius: 17,
+          // borderTopLeftRadius: 17,
+          // borderTopRightRadius: 17,
         },
         tabBarItemStyle: { paddingVertical: Platform.OS == "android" ? 10 : 0 },
         tabBarActiveTintColor: "white",

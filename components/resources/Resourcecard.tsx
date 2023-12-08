@@ -1,21 +1,27 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import React from "react";
+import { Link } from "expo-router";
 
 type Props = {};
 
 const Resourcecard = (props: Props) => {
   return (
-    <View style={{ marginRight: 10, position: "relative", width: 300 }}>
-      <Image
-        style={styles.image}
-        source={{ uri: "https://shorturl.at/bepqL" }}
-      />
-      <View style={styles.darkbg}></View>
-      <View style={styles.content}>
-        <Text style={styles.title}>Essential Yoga Flows for Every Day</Text>
-        <Text style={styles.subtitle}>6 Workouts - All Levels</Text>
+    <Link
+      href={"/(tabs)/profile/myresources/resourcedetail"}
+      suppressHighlighting
+    >
+      <View style={{ marginRight: 10, position: "relative", width: 300 }}>
+        <Image
+          style={styles.image}
+          source={{ uri: "https://shorturl.at/bepqL" }}
+        />
+        <View style={styles.darkbg}></View>
+        <View style={styles.content}>
+          <Text style={styles.title}>Essential Yoga Flows for Every Day</Text>
+          <Text style={styles.subtitle}>6 Workouts - All Levels</Text>
+        </View>
       </View>
-    </View>
+    </Link>
   );
 };
 
