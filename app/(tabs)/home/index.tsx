@@ -8,8 +8,15 @@ import {
   ScrollView,
   Pressable,
   Image,
+  SafeAreaView,
+  StatusBar,
 } from "react-native";
-import { primary2 } from "../../../constants/Colors";
+import {
+  primary,
+  primary2,
+  primary3,
+  primary4,
+} from "../../../constants/Colors";
 import HandEmoji from "../../../assets/images/handemoji.svg";
 import { Feather } from "@expo/vector-icons";
 import Slideposts, { sliderdata } from "../../../components/users/Slideposts";
@@ -28,7 +35,9 @@ export default function TabOneScreen() {
   const { currentuser } = useSelector((state: any) => state.userSlice);
   const username = currentuser?.user_metadata.firstname;
   return (
-    <View style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: primary3 }}>
+      <StatusBar barStyle={"light-content"} backgroundColor={primary3} />
+
       <ScrollView style={styles.container}>
         <View style={styles.top}>
           <View>
@@ -95,7 +104,7 @@ export default function TabOneScreen() {
       >
         <MaterialIcons name="message" size={24} color="white" />
       </Pressable>
-    </View>
+    </SafeAreaView>
   );
 }
 

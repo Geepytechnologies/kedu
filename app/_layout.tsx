@@ -84,14 +84,19 @@ function RootLayoutNav() {
         <ThemeProvider
           value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
         >
-          <StatusBar style={"auto"} />
+          {/* <StatusBar style={"auto"} backgroundColor="red" /> */}
 
           <Stack>
             <Stack.Screen name="modal" options={{ presentation: "modal" }} />
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
             <Stack.Screen name="index" options={{ headerShown: false }} />
+            <Stack.Screen name="homepage" options={{ headerShown: false }} />
             <Stack.Screen
-              name="selectprofile"
+              name="(auth)/selectprofile"
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="(auth)/chooseauth"
               options={{ headerShown: false }}
             />
             <Stack.Screen

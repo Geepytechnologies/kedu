@@ -37,7 +37,7 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarStyle: {
-          backgroundColor: primary,
+          backgroundColor: "black",
           height: Platform.OS == "android" ? 70 : 80,
           // borderTopLeftRadius: 17,
           // borderTopRightRadius: 17,

@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { FontAwesome } from "@expo/vector-icons";
-import { primary, primary2 } from "../../constants/Colors";
+import { primary, primary2, primary3 } from "../../constants/Colors";
 import { Link, router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
@@ -18,6 +18,7 @@ import { useDispatch } from "react-redux";
 import { AUTHENTICATE } from "../../utils/redux/slices/authSlice";
 import { SIGNIN } from "../../utils/redux/slices/userSlice";
 import { usePushNotifications } from "../../hooks/usePushNotifications";
+import { StatusBar } from "expo-status-bar";
 
 type Props = {};
 
@@ -71,6 +72,8 @@ const login = (props: Props) => {
   };
   return (
     <View style={styles.container}>
+      <StatusBar style={"light"} backgroundColor={primary3} />
+
       <View style={styles.header}>
         <Pressable onPress={() => router.back()}>
           <FontAwesome name="angle-left" size={30} color="white" />
@@ -84,24 +87,32 @@ const login = (props: Props) => {
             onChangeText={(text) => handleEmailChange(text)}
             placeholder="user@gmail.com"
             placeholderTextColor={primary2}
-            style={styles.inputbox}
+            style={styles.emailbox}
           />
         </View>
         <View>
           <Text style={styles.logintext}>Password</Text>
-          <TextInput
-            onChangeText={(text) => handlePasswordChange(text)}
-            placeholder="********"
-            secureTextEntry={true}
-            placeholderTextColor={primary2}
-            style={styles.inputbox}
-          />
+          <View style={[styles.inputcon]}>
+            <TextInput
+              onChangeText={(text) => handlePasswordChange(text)}
+              placeholder="********"
+              secureTextEntry={!isPasswordVisible}
+              placeholderTextColor={primary2}
+              style={styles.inputbox}
+            />
+            <Pressable onPress={togglePasswordVisibility}>
+              <Ionicons
+                style={{ fontSize: 20 }}
+                name={isPasswordVisible ? "eye" : "eye-off"}
+              />
+            </Pressable>
+          </View>
         </View>
         <Pressable onPress={handlePress} style={styles.submitbtn}>
           {loading ? (
             <ActivityIndicator size={"large"} color={"white"} />
           ) : (
-            <Text style={styles.submitbtn}>Submit</Text>
+            <Text style={styles.submitbtntext}>Submit</Text>
           )}
         </Pressable>
         <View style={{ display: "flex", gap: 10 }}>
@@ -159,22 +170,39 @@ const styles = StyleSheet.create({
     fontSize: 17,
     color: "white",
   },
-  inputbox: {
+  inputcon: {
     backgroundColor: "white",
     paddingVertical: 15,
     paddingHorizontal: 20,
     borderRadius: 5,
+    flexDirection: "row",
+    gap: 5,
+  },
+  emailbox: {
+    backgroundColor: "white",
     color: primary2,
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+  },
+  inputbox: {
+    backgroundColor: "transparent",
+    color: primary2,
+    flex: 1,
   },
   submitbtn: {
-    fontFamily: "Poppins_500Medium",
-    fontSize: 17,
-    color: "white",
     backgroundColor: primary,
     paddingVertical: 15,
     paddingHorizontal: 20,
-    textAlign: "center",
+    alignItems: "center",
+    justifyContent: "center",
     borderRadius: 5,
+  },
+  submitbtntext: {
+    fontFamily: "Poppins_500Medium",
+    fontSize: 17,
+    color: "white",
+    textAlign: "center",
   },
   dont: {
     color: "white",

@@ -22,7 +22,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/whitelogo.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#008080"
       },
       "package": "com.geepytech.kedu",
       "googleServicesFile": "./google-services.json"

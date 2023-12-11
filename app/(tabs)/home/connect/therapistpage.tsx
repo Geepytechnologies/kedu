@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
-import { router, useLocalSearchParams } from "expo-router";
+import { Link, router, useLocalSearchParams } from "expo-router";
 import People from "../../../../assets/images/people.svg";
 import { primary, secondary } from "../../../../constants/Colors";
 import Doctorprofilecard from "../../../../components/Doctorprofilecard";
@@ -134,7 +134,9 @@ const Therapistheader = (props: Props) => {
               >
                 <Text style={{ color: "#fff" }}>Connect</Text>
               </View>
-              <Text
+              <Link
+                href={"/(tabs)/profile/chat/room"}
+                suppressHighlighting
                 style={{
                   borderColor: primary,
                   borderWidth: 2,
@@ -144,7 +146,7 @@ const Therapistheader = (props: Props) => {
                 }}
               >
                 Message
-              </Text>
+              </Link>
             </View>
           </View>
         </View>

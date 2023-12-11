@@ -1,43 +1,91 @@
-import { Image, StyleSheet, Text, View, Platform } from "react-native";
-import React from "react";
-import { primary, primary2, primary3 } from "../constants/Colors";
+import { Animated, Easing, StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useRef } from "react";
+import { Link } from "expo-router";
 import Logo from "../components/svgs/Logo";
 import Textlogo from "../components/svgs/Textlogo";
-import { Feather } from "@expo/vector-icons";
+import Topleft from "../assets/images/wavytopleft.svg";
+import Topright from "../assets/images/topright.svg";
+import Bottomleft from "../assets/images/bottomleft.svg";
+import Bottomright from "../assets/images/bottomright.svg";
+import { primary, primary2, primary3 } from "../constants/Colors";
 import { StatusBar } from "expo-status-bar";
-import { Link } from "expo-router";
 
 type Props = {};
 
 const index = (props: Props) => {
+  const scaleValue = useRef(new Animated.Value(0)).current;
+  const opacityValue = useRef(new Animated.Value(1)).current;
+
+  useEffect(() => {
+    const scaleAnimation = Animated.sequence([
+      Animated.timing(scaleValue, {
+        toValue: 1,
+        duration: 1000,
+        easing: Easing.linear,
+        useNativeDriver: true,
+      }),
+      Animated.timing(scaleValue, {
+        toValue: 0,
+        duration: 0,
+        useNativeDriver: true,
+      }),
+    ]);
+
+    const opacityAnimation = Animated.sequence([
+      Animated.timing(opacityValue, {
+        toValue: 0.7,
+        duration: 1000,
+        easing: Easing.linear,
+        useNativeDriver: true,
+      }),
+      Animated.timing(opacityValue, {
+        toValue: 1,
+        duration: 0,
+        useNativeDriver: true,
+      }),
+    ]);
+
+    // Create an infinite loop for the ripple animation
+    const infiniteRipple = Animated.parallel([
+      Animated.loop(scaleAnimation),
+      Animated.loop(opacityAnimation),
+    ]);
+
+    infiniteRipple.start(); // Start the infinite ripple animation
+  }, [scaleValue, opacityValue]);
+
+  const scale = scaleValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: [1, 2],
+  });
+
   return (
     <View style={styles.container}>
-      <StatusBar style={"light"} />
-      <View style={styles.logocon}>
-        <Logo width={25} height={25} />
-        <Textlogo width={63} height={28} />
-      </View>
-      <Image
-        style={styles.image}
-        source={require("../assets/images/youngboy2.png")}
+      <StatusBar style={"light"} backgroundColor={primary3} />
+
+      <Topleft style={{ opacity: 0.4 }} />
+      <Topright
+        style={{ opacity: 0.4, position: "absolute", top: 0, right: 0 }}
       />
-      <Text style={styles.username}>kedu Andrew</Text>
-      <Text style={styles.message}>
-        Your mind is your greatest asset give it the best of care with our
-        platform
-      </Text>
-      <View style={styles.navcon}>
-        <View style={{ display: "flex", flexDirection: "row", gap: 4 }}>
-          <View style={styles.nonactivebar}></View>
-          <View style={styles.nonactivebar}></View>
-          <View style={styles.nonactivebar}></View>
-          <View style={styles.activebar}></View>
+      <Bottomleft
+        style={{ opacity: 0.4, position: "absolute", bottom: 0, left: 0 }}
+      />
+      <Bottomright
+        style={{ opacity: 0.4, position: "absolute", bottom: 0, right: 0 }}
+      />
+      <View style={styles.container2}>
+        <View style={styles.logocon}>
+          <Animated.View
+            style={{
+              transform: [{ scale }],
+              opacity: opacityValue,
+              marginBottom: 15,
+            }}
+          >
+            <Logo width={46} height={46} />
+          </Animated.View>
+          <Textlogo width={116} height={52} />
         </View>
-        <Link href={"/selectprofile"}>
-          <View style={styles.arrow}>
-            <Feather name="arrow-right" size={24} color="#333333" />
-          </View>
-        </Link>
       </View>
     </View>
   );
@@ -49,60 +97,44 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: primary2,
     flex: 1,
+    position: "relative",
+  },
+  container2: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    padding: 16,
+    height: "100%",
+    width: "100%",
+    position: "absolute",
+    top: 0,
   },
   logocon: {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "column",
+    alignItems: "center",
     gap: 7,
     marginBottom: 40,
   },
-  image: {
-    width: 342,
-    height: 309,
-    resizeMode: "contain",
-  },
-  username: {
-    fontWeight: "500",
+  login: {
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    textAlign: "center",
+    backgroundColor: "#fff",
+    color: primary2,
     fontFamily: "Poppins_500Medium",
-    color: "white",
-    fontSize: 32,
-  },
-  message: {
-    fontFamily: "Poppins_400Regular",
-    color: "white",
-    fontSize: 15,
-  },
-  arrow: {
-    backgroundColor: "white",
-    borderRadius: 50,
-    height: 62,
-    width: 62,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  nonactivebar: {
-    backgroundColor: "#BDBDBD",
-    width: 4,
-    height: 4,
-    opacity: 0.3,
-    borderRadius: 50,
-  },
-  activebar: {
-    backgroundColor: "white",
-    width: 21,
-    height: 4,
+    fontSize: 17,
     borderRadius: 5,
+    minWidth: 325,
   },
-  navcon: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    width: "100%",
-    marginTop: 69,
+  signup: {
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    textAlign: "center",
+    backgroundColor: primary,
+    color: "white",
+    fontFamily: "Poppins_500Medium",
+    fontSize: 17,
+    borderRadius: 5,
+    minWidth: 325,
   },
 });

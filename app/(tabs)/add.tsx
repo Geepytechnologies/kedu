@@ -1,24 +1,36 @@
 import {
   Platform,
   Pressable,
-  SafeAreaView,
-  StatusBar,
   StyleSheet,
   Text,
   View,
+  ScrollView,
   Image,
+  SafeAreaView,
+  StatusBar,
 } from "react-native";
 import React from "react";
 import { Entypo, Feather, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
-import { primary, primary2 } from "../../constants/Colors";
+import { primary, primary2, primary3, primary4 } from "../../constants/Colors";
+// import { SafeAreaView } from "react-native-safe-area-context";
+// import { StatusBar } from "expo-status-bar";
 
 type Props = {};
 
 const add = (props: Props) => {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.container}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor: primary4,
+      }}
+    >
+      <StatusBar barStyle={"dark-content"} backgroundColor={primary4} />
+      <ScrollView
+        contentContainerStyle={{ justifyContent: "center" }}
+        style={styles.container}
+      >
         <View
           style={[
             styles.rowview,
@@ -69,7 +81,15 @@ const add = (props: Props) => {
           </View>
         </View>
         {/* controls */}
-        <View style={[styles.rowview, { justifyContent: "space-between" }]}>
+        <View
+          style={[
+            styles.rowview,
+            {
+              justifyContent: "space-between",
+              marginBottom: Platform.OS === "android" ? 90 : 0,
+            },
+          ]}
+        >
           <Feather name="repeat" size={24} color="white" />
           <Ionicons name="play-skip-back" size={24} color="white" />
           <Pressable
@@ -87,7 +107,7 @@ const add = (props: Props) => {
           <Ionicons name="play-skip-forward" size={24} color="white" />
           <Ionicons name="heart" size={24} color="white" />
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -97,8 +117,9 @@ export default add;
 const styles = StyleSheet.create({
   container: {
     padding: 20,
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 12,
-    backgroundColor: primary2,
+    // paddingBottom: Platform.OS === "android" ? 200 : 0,
+    paddingTop: Platform.OS === "android" ? 30 : 0,
+    backgroundColor: primary,
     flex: 1,
   },
   connectcon: {

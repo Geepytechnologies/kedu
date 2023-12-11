@@ -133,7 +133,7 @@ const signup = (props: Props) => {
           {loading ? (
             <ActivityIndicator size={"large"} color={"white"} />
           ) : (
-            <Text style={styles.submitbtn}>Submit</Text>
+            <Text style={styles.submitbtntext}>Submit</Text>
           )}
         </Pressable>
         <View style={{ display: "flex", gap: 10 }}>
@@ -199,14 +199,18 @@ const styles = StyleSheet.create({
     color: primary2,
   },
   submitbtn: {
-    fontFamily: "Poppins_500Medium",
-    fontSize: 17,
-    color: "white",
     backgroundColor: primary,
     paddingVertical: 15,
     paddingHorizontal: 20,
-    textAlign: "center",
+    alignItems: "center",
+    justifyContent: "center",
     borderRadius: 5,
+  },
+  submitbtntext: {
+    fontFamily: "Poppins_500Medium",
+    fontSize: 17,
+    color: "white",
+    textAlign: "center",
   },
   dont: {
     color: "white",

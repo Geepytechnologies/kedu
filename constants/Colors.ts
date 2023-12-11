@@ -4,6 +4,7 @@ const tintColorDark = "#fff";
 export const primary = "#005F60";
 export const primary2 = "#008080";
 export const primary3 = "#43B4B3";
+export const primary4 = "#CCF1D2";
 export const secondary = "#EDA600";
 
 export const turquoise = "#CE414A";
